@@ -45,7 +45,7 @@
       <br>
       <br>
       <center>
-        <div>Completed Tasks: {{filteredTasks.filter(i => {return i.status == true}).length}}</div>
+        <div>Completed Tasks: {{filteredTasks.filter(i => {return  i.status == true}).length}}</div>
         <div>Tasks In Progress : {{filteredTasks.filter(i => {return i.status == false}).length}}</div>
       </center>
       <br>
@@ -53,12 +53,12 @@
     
       <div v-for="i in filteredTasks"
           :key="i.id"
-          class="item">
+          class="item" v-show="!i.status">
   
-        <div class="item-content has-secondary">
+        <div class="item">
   
         
-          <q-checkbox v-model="i.status"></q-checkbox>   {{i.title}}
+          <button @click.prevent="CompleteTask(i.id)">x</button>   {{i.title}}
         
         </div>
   
@@ -91,8 +91,8 @@ export default {
 
   data() {
     return {
-      search: '',
-      taskList: LocalStorage.get.item('tasks', [])
+      search: ''
+      
     }
   },
   computed: {
@@ -113,11 +113,11 @@ export default {
       }
 
       if (this.search.length > 0) {
-        var retv = filter(this.taskList, this.search);
+        var retv = filter(this.$store.state.taskList, this.search);
         return retv;
       }
 
-      return this.taskList
+      return this.$store.state.taskList
     }
   },
 
@@ -125,7 +125,7 @@ export default {
     onEdit(id) {
       console.log("edit:", id)
       this.$store.state.id = id
-      var task = _.find(this.taskList, { id: id })
+      var task = _.find(this.$store.state.taskList, { id: id })
       if (task) {
         this.$store.state.title = task.title
       }
@@ -135,11 +135,25 @@ export default {
 
       console.log(id)
 
-      var task = _.find(this.taskList, { id: id })
-      this.taskList.splice(this.taskList.indexOf(task), 1)
+      var task = _.find(this.$store.state.taskList, { id: id })
+      this.$store.state.taskList.splice(this.$store.state.taskList.indexOf(task), 1)
 
       this.$store.dispatch('deleteItem', id)
     },
+
+    CompleteTask(id){
+      var taskList = LocalStorage.get.item('tasks')
+      var task = _.find(this.$store.state.taskList, { id: id })
+      if(task){
+        task.status = true;
+         
+      }
+      
+   LocalStorage.set('tasks',this.$store.state.taskList)
+   
+    },
+
+  
 
   },
 

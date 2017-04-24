@@ -14,7 +14,7 @@ function counter () {
 const state = {
   id: 0,
   title: '',
-  taskList: []
+  taskList: LocalStorage.get.item('tasks')
 }
 
 const actions = {
@@ -43,12 +43,11 @@ const mutations = {
       title: state.title,
       status: false
     }
-    var taskList = LocalStorage.get.item('tasks')
-    console.log(taskList)
     state.taskList.push(newTask)
     console.log(state.taskList)
     LocalStorage.set('tasks', state.taskList)
     Toast.create.positive('success')
+    state.title = ''
   },
 
   edit (state, id) {
@@ -64,6 +63,7 @@ const mutations = {
       task.title = state.title
       LocalStorage.set('tasks', state.taskList)
       Toast.create.positive('success')
+      state.title = ''
     }
   },
 

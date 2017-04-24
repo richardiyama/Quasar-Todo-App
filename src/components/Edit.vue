@@ -3,14 +3,19 @@
         <div slot="header"
              class="toolbar">
     
-            <q-toolbar-title :padding="1">
-                Edit Todo
-            </q-toolbar-title>
+            <q-tabs>
+                <q-tab icon="undo"
+                       route="/"
+                       exact>
+                    Back
+                </q-tab>
+    
+            </q-tabs>
         </div>
         <div class="layout-view">
             <br>
             <br>
-            <center> <a v-link="{ path: '/' }">Back</a> </center>
+            
             <br>
             <br>
             <br>
