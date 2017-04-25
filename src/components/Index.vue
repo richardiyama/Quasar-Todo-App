@@ -14,22 +14,22 @@
             <br>
             <br>
             <br>
-            <span class="label bg-primary"><i>dashboard</i>Dashboard</span>
+            <span ><i>dashboard</i>Dashboard</span>
             <br>
             <br>
   
           </div>
   
-          <q-drawer-link class="text-primary"
+          <q-drawer-link 
                          icon="update"
                          to="/">Tasks</q-drawer-link>
-          <q-drawer-link class="text-primary"
+          <q-drawer-link 
                          icon="create"
                          to="/Add">Create Tasks</q-drawer-link>
-          <q-drawer-link class="text-primary"
+          <q-drawer-link 
                          icon="settings"
                          to="#">Account Settings</q-drawer-link>
-          <q-drawer-link class="text-primary"
+          <q-drawer-link 
                          icon="exit_to_app"
                          to="#">Logout</q-drawer-link>
         </div>
@@ -40,26 +40,25 @@
     </div>
   
     <div class="layout-view">
-      <q-search class="primary"
+      <q-search class="default"
                 v-model="search"></q-search>
       <br>
       <br>
       <center>
-        <div>Completed Tasks: {{filteredTasks.filter(i => {return  i.status == true}).length}}</div>
+        <div>Completed Tasks: {{filteredTasks.filter(i => {return i.status == true}).length}}</div>
         <div>Tasks In Progress : {{filteredTasks.filter(i => {return i.status == false}).length}}</div>
       </center>
       <br>
-     
-    
+  
       <div v-for="i in filteredTasks"
-          :key="i.id"
-          class="item" v-show="!i.status">
+           :key="i.id"
+           class="item"
+           v-show="!i.status">
   
         <div class="item">
   
-        
-          <button @click.prevent="CompleteTask(i.id)">x</button>   {{i.title}}
-        
+          <button @click.prevent="CompleteTask(i.id)">x</button> {{i.title}}
+  
         </div>
   
         <div class="item-icons item-secondary">
@@ -78,7 +77,7 @@
             </q-fab>
           </div>
         </div>
-      
+  
       </div>
   </q-layout>
 </template>
@@ -92,7 +91,7 @@ export default {
   data() {
     return {
       search: ''
-      
+
     }
   },
   computed: {
@@ -141,19 +140,19 @@ export default {
       this.$store.dispatch('deleteItem', id)
     },
 
-    CompleteTask(id){
+    CompleteTask(id) {
       var taskList = LocalStorage.get.item('tasks')
       var task = _.find(this.$store.state.taskList, { id: id })
-      if(task){
+      if (task) {
         task.status = true;
-         
+
       }
-      
-   LocalStorage.set('tasks',this.$store.state.taskList)
-   
+
+      LocalStorage.set('tasks', this.$store.state.taskList)
+
     },
 
-  
+
 
   },
 
@@ -162,6 +161,36 @@ export default {
 
 </script>
 <style>
+body.with-drawer-opened{
+ background: -moz-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(5,193,255,1) 50%, rgba(5,193,255,1) 100%); /* ff3.6+ */
+background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(49%, rgba(255,255,255,1)), color-stop(50%, rgba(5,193,255,1)), color-stop(100%, rgba(5,193,255,1))); /* safari4+,chrome */
+background: -webkit-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(5,193,255,1) 50%, rgba(5,193,255,1) 100%); /* safari5.1+,chrome10+ */
+background: -o-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(5,193,255,1) 50%, rgba(5,193,255,1) 100%); /* opera 11.10+ */
+background: -ms-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(5,193,255,1) 50%, rgba(5,193,255,1) 100%); /* ie10+ */
+background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(5,193,255,1) 50%, rgba(5,193,255,1) 100%); /* w3c */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05C1FF', endColorstr='#FFFFFF',GradientType=1 ); /* ie6-9 */
+}
+.drawer-content {
+    z-index: 30;
+    position: fixed;
+    background: #566b78;
+    top: 0;
+    bottom: 0;
+    width: 260px;
+    font-size: 1rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    will-change: scroll-position, transform;
+}
+
+.q-toolbar-title {
+  background-color: #FFEBEE
+}
+
+.q-search {
+  background-color: #FFEBEE
+}
+
 .item .item-content {
   max-width: 60%;
   margin: 0;

@@ -14,7 +14,7 @@ function counter () {
 const state = {
   id: 0,
   title: '',
-  taskList: LocalStorage.get.item('tasks')
+  taskList: []
 }
 
 const actions = {
