@@ -14,7 +14,8 @@ function counter () {
 const state = {
   id: 0,
   title: '',
-  taskList: []
+  taskList: LocalStorage.get.item('tasks', []) || [],
+  search: ''
 }
 
 const actions = {
@@ -29,16 +30,37 @@ const actions = {
 }
 
 
+const getters = {
+  filteredTasks (state) {
+    function filter (arrayInTaskList, Searchterm) {
+      retv = []
+      for (var i = 0; i < arrayInTaskList.length; i++) {
+        var title = arrayInTaskList[i]['title'].toLowerCase()
+        if (title.indexOf(Searchterm.toLowerCase()) !== -1) {
+          retv.push(arrayInTaskList[i])
+        }
+      }
+      return retv
+    }
 
+    if (state.search.length > 0) {
+      var retv = filter(state.taskList, state.search)
+      return retv
+    }
+
+    return state.taskList
+  }
+
+}
 
 const mutations = {
   add (state) {
     if (state.title === '') {
-      Toast.create.warning('Warning!!!...You are trying to submit an empty field')
+      Toast.create('Warning!!!...You are trying to submit an empty field')
       return
     }
 
-    const newTask = {
+    var newTask = {
       id: counter(),
       title: state.title,
       status: false
@@ -46,7 +68,7 @@ const mutations = {
     state.taskList.push(newTask)
     console.log(state.taskList)
     LocalStorage.set('tasks', state.taskList)
-    Toast.create.positive('success')
+    Toast.create('success')
     state.title = ''
   },
 
@@ -55,14 +77,14 @@ const mutations = {
     var task = _.find(state.taskList, { id: state.id })
     console.log(id)
     if (state.title === '') {
-      Toast.create.warning('Warning!!!...You are trying to submit an empty field')
+      Toast.create('Warning!!!...You are trying to submit an empty field')
       return
     }
     if (task) {
       console.log(state.title)
       task.title = state.title
       LocalStorage.set('tasks', state.taskList)
-      Toast.create.positive('success')
+      Toast.create('success')
       state.title = ''
     }
   },
@@ -84,5 +106,7 @@ const mutations = {
 export default new Vuex.Store({
   state,
   actions,
-  mutations
+  mutations,
+  getters
 })
+

@@ -14,24 +14,17 @@
             <br>
             <br>
             <br>
-            <span ><i>dashboard</i>Dashboard</span>
+            <span><i id="tagline1">dashboard</i>Dashboard</span>
             <br>
             <br>
-  
+            <br>
+            <br>
           </div>
   
-          <q-drawer-link 
-                         icon="update"
-                         to="/">Tasks</q-drawer-link>
-          <q-drawer-link 
-                         icon="create"
-                         to="/Add">Create Tasks</q-drawer-link>
-          <q-drawer-link 
-                         icon="settings"
-                         to="#">Account Settings</q-drawer-link>
-          <q-drawer-link 
-                         icon="exit_to_app"
-                         to="#">Logout</q-drawer-link>
+          <q-drawer-link to="/"> <i id="tagline3">update</i>Tasks</q-drawer-link>
+          <br>
+          <br>
+          <q-drawer-link to="/Add"><i id="tagline2">create</i>Create Tasks</q-drawer-link>
         </div>
       </q-drawer>
       <q-toolbar-title :padding="1">
@@ -41,16 +34,16 @@
   
     <div class="layout-view">
       <q-search class="default"
-                v-model="search"></q-search>
+                v-model="$store.state.search"></q-search>
       <br>
       <br>
       <center>
-        <div>Completed Tasks: {{filteredTasks.filter(i => {return i.status == true}).length}}</div>
-        <div>Tasks In Progress : {{filteredTasks.filter(i => {return i.status == false}).length}}</div>
+        <div>Completed Tasks: {{Todos.filter(i => {return i.status == true}).length}}</div>
+        <div>Tasks In Progress : {{Todos.filter(i => {return i.status == false}).length}}</div>
       </center>
       <br>
   
-      <div v-for="i in filteredTasks"
+      <div v-for="i in Todos"
            :key="i.id"
            class="item"
            v-show="!i.status">
@@ -90,33 +83,14 @@ export default {
 
   data() {
     return {
-      search: ''
 
     }
   },
   computed: {
 
 
-    filteredTasks() {
-
-
-      function filter(arrayInTaskList, Searchterm) {
-        retv = [];
-        for (var i = 0; i < arrayInTaskList.length; i++) {
-          var title = arrayInTaskList[i]['title'].toLowerCase();
-          if (title.indexOf(Searchterm.toLowerCase()) != -1) {
-            retv.push(arrayInTaskList[i]);
-          }
-        }
-        return retv;
-      }
-
-      if (this.search.length > 0) {
-        var retv = filter(this.$store.state.taskList, this.search);
-        return retv;
-      }
-
-      return this.$store.state.taskList
+    Todos() {
+      return this.$store.getters.filteredTasks
     }
   },
 
@@ -148,47 +122,82 @@ export default {
 
       }
 
-      LocalStorage.set('tasks', this.$store.state.taskList)
+      //LocalStorage.set('tasks', this.$store.state.taskList)
 
     },
 
 
 
   },
+mounted() {
 
+    // create task store if not exist
+    if (LocalStorage.has('tasks') === false) {
+      LocalStorage.set('tasks', [])
+    }
+  }
 
 }
 
 </script>
 <style>
-body.with-drawer-opened{
- background: -moz-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(5,193,255,1) 50%, rgba(5,193,255,1) 100%); /* ff3.6+ */
-background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(49%, rgba(255,255,255,1)), color-stop(50%, rgba(5,193,255,1)), color-stop(100%, rgba(5,193,255,1))); /* safari4+,chrome */
-background: -webkit-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(5,193,255,1) 50%, rgba(5,193,255,1) 100%); /* safari5.1+,chrome10+ */
-background: -o-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(5,193,255,1) 50%, rgba(5,193,255,1) 100%); /* opera 11.10+ */
-background: -ms-linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(5,193,255,1) 50%, rgba(5,193,255,1) 100%); /* ie10+ */
-background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(5,193,255,1) 50%, rgba(5,193,255,1) 100%); /* w3c */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05C1FF', endColorstr='#FFFFFF',GradientType=1 ); /* ie6-9 */
+#tagline3 {
+  color: orange;
+  width: 72px;
 }
+
+#tagline1 {
+  color: orange;
+  width: 72px;
+}
+
+#tagline2 {
+  color: orange;
+  width: 61px;
+}
+
+body.with-drawer-opened {
+  background: -moz-linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 49%, rgba(5, 193, 255, 1) 50%, rgba(5, 193, 255, 1) 100%);
+  /* ff3.6+ */
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(49%, rgba(255, 255, 255, 1)), color-stop(50%, rgba(5, 193, 255, 1)), color-stop(100%, rgba(5, 193, 255, 1)));
+  /* safari4+,chrome */
+  background: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 49%, rgba(5, 193, 255, 1) 50%, rgba(5, 193, 255, 1) 100%);
+  /* safari5.1+,chrome10+ */
+  background: -o-linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 49%, rgba(5, 193, 255, 1) 50%, rgba(5, 193, 255, 1) 100%);
+  /* opera 11.10+ */
+  background: -ms-linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 49%, rgba(5, 193, 255, 1) 50%, rgba(5, 193, 255, 1) 100%);
+  /* ie10+ */
+  background: linear-gradient(45deg, rgba(235, 235, 235, 1) 11%, rgba(235, 235, 235, 1) 42%, rgba(235, 235, 235, 1) 56%, rgba(10, 10, 10, 0.62) 58%, rgb(12, 12, 12) 79%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05C1FF', endColorstr='#FFFFFF', GradientType=1);
+  /* ie6-9 */
+}
+
 .drawer-content {
-    z-index: 30;
-    position: fixed;
-    background: #566b78;
-    top: 0;
-    bottom: 0;
-    width: 260px;
-    font-size: 1rem;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    will-change: scroll-position, transform;
+  z-index: 30;
+  position: fixed;
+  background: #566b78;
+  top: 0;
+  bottom: 0;
+  width: 260px;
+  font-size: 1rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  will-change: scroll-position, transform;
+}
+
+.drawer-content.left-side {
+  left: 0;
+  -webkit-transform: translateX(-260px);
+  transform: translateX(-260px);
+  background-color: #EBEBEB;
 }
 
 .q-toolbar-title {
-  background-color: #FFEBEE
+  background-color: #EBEBEB;
 }
 
 .q-search {
-  background-color: #FFEBEE
+  background-color: #EBEBEB;
 }
 
 .item .item-content {
@@ -216,6 +225,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05C1FF', end
   margin-left: 15px;
 }
 
+.item {
+  color: black;
+}
+
 .item p i:first-child {
   font-size: 21px;
   margin: 5px;
@@ -223,6 +236,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05C1FF', end
 
 .q-fab button {
   margin: 16px;
+}
+
+.q-fab {
+  width: 200px;
 }
 
 button.circular {
@@ -234,5 +251,9 @@ button.circular {
 .q-fab-active-icon {
   top: 9px;
   left: 8px;
+}
+
+button.circular.raised.primary {
+  background-color: #8eacbb;
 }
 </style>
