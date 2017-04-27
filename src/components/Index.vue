@@ -50,8 +50,15 @@
   
         <div class="item">
   
-          <button @click.prevent="CompleteTask(i.id)">x</button> {{i.title}}
-  
+          
+          <div class="list">
+            <label class="item">
+              <div class="item-content">
+                
+            <div class="item-primary"><button @click.prevent="CompleteTask(i.id)"><i class="material-icons">&#xE836;</i></button> {{i.title}}</div>
+              </div>
+            </label>
+              </div>
         </div>
   
         <div class="item-icons item-secondary">
@@ -70,8 +77,20 @@
             </q-fab>
           </div>
         </div>
-  
+ 
+
       </div>
+      
+
+
+ 
+   <br>
+   <button @click="$router.push('/Add')" class="primary1 circular">
+  <i>add</i>
+  </button>
+ 
+ 
+      
   </q-layout>
 </template>
 
@@ -129,7 +148,7 @@ export default {
 
 
   },
-mounted() {
+  mounted() {
 
     // create task store if not exist
     if (LocalStorage.has('tasks') === false) {
@@ -142,34 +161,19 @@ mounted() {
 </script>
 <style>
 #tagline3 {
-  color: orange;
-  width: 72px;
+  color: #2196f3;
+  margin: 1px;
 }
 
 #tagline1 {
-  color: orange;
-  width: 72px;
+  color: #2196f3;
+  margin: 1px;
 }
+
 
 #tagline2 {
-  color: orange;
-  width: 61px;
-}
-
-body.with-drawer-opened {
-  background: -moz-linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 49%, rgba(5, 193, 255, 1) 50%, rgba(5, 193, 255, 1) 100%);
-  /* ff3.6+ */
-  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(49%, rgba(255, 255, 255, 1)), color-stop(50%, rgba(5, 193, 255, 1)), color-stop(100%, rgba(5, 193, 255, 1)));
-  /* safari4+,chrome */
-  background: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 49%, rgba(5, 193, 255, 1) 50%, rgba(5, 193, 255, 1) 100%);
-  /* safari5.1+,chrome10+ */
-  background: -o-linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 49%, rgba(5, 193, 255, 1) 50%, rgba(5, 193, 255, 1) 100%);
-  /* opera 11.10+ */
-  background: -ms-linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 49%, rgba(5, 193, 255, 1) 50%, rgba(5, 193, 255, 1) 100%);
-  /* ie10+ */
-  background: linear-gradient(45deg, rgba(235, 235, 235, 1) 11%, rgba(235, 235, 235, 1) 42%, rgba(235, 235, 235, 1) 56%, rgba(10, 10, 10, 0.62) 58%, rgb(12, 12, 12) 79%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05C1FF', endColorstr='#FFFFFF', GradientType=1);
-  /* ie6-9 */
+  color: #2196f3;
+  margin: 1px
 }
 
 .drawer-content {
@@ -189,7 +193,7 @@ body.with-drawer-opened {
   left: 0;
   -webkit-transform: translateX(-260px);
   transform: translateX(-260px);
-  background-color: #EBEBEB;
+  background-color: snow;
 }
 
 .q-toolbar-title {
@@ -204,11 +208,15 @@ body.with-drawer-opened {
   max-width: 60%;
   margin: 0;
   padding: 0 !important;
+  height: 44px;
+  min-height: 0;
 }
 
 .item .item-content q-checkbox {
   width: 100%;
   margin: 0;
+   height: 44px;
+  min-height: 0;
 }
 
 .item .item-icons {
@@ -235,16 +243,35 @@ body.with-drawer-opened {
 }
 
 .q-fab button {
-  margin: 16px;
+  margin: 25px;
 }
 
 .q-fab {
-  width: 200px;
+  width: 170px;
 }
 
 button.circular {
   height: 37px;
   width: 37px;
+}
+
+button.primary1 {
+  position: fixed;
+  bottom: 0;
+  margin: 10px;
+  background: #38b93d;
+  color: white;
+  height: 60px;
+  width: 60px;
+  right:  50px;
+}
+
+
+.list {
+    text-align: center;
+    border: 1px solid hsla(0, 4%, 43%, 0.16);
+    margin: 6px;
+    background-color: white;
 }
 
 .q-fab-icon,
@@ -254,6 +281,51 @@ button.circular {
 }
 
 button.circular.raised.primary {
-  background-color: #8eacbb;
+  background: #2196f3;
+  color: white;
 }
+button.hide-on-drawer-visible{
+   background: #2196f3;
+}
+
+.toolbar {
+  background: #2196f3;
+  color: white;
+}
+
+.q-search-input {
+  background: #2196f3;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500px;
+}
+
+div.list-header {
+  background-color: snow;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500px;
+  color: black;
+  width: 100px;
+}
+
+.q-search-icon {
+  color: white;
+  background: #2196f3;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500px;
+}
+
+
+.layout-view {
+
+
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400px;
+  line-height: 1.5;
+  background: snow;
+  color: black;
+}
+
+
+
+
 </style>
