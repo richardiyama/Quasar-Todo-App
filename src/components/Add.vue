@@ -19,31 +19,40 @@
             <br>
             <br>
             <br>
-            <div class="floating-label">
+         
+                <br>
+                <br>
     
                 <input v-model="$store.state.title"
                        @keyup.enter="add"
                        required
+                       class="full-width" placeholder="New Todo">
+             <input type="date" v-model="$store.state.date"
+                       @keyup.enter="add"
+                       required
                        class="full-width">
-                <label id="tagline">New Todo</label>
-                <br>
-                <br>
+
+                     <input type="time" v-model="$store.state.time"
+                       @keyup.enter="add"
+                       required
+                       class="full-width">  
+                
                 <br>
                 <br>
                 <br>
                 <br>
                 <center>
-                    <button class="primary"
+                    <button class="primary2"
                             @click="add">
                         Add
                     </button>
     
-                    <button class="danger"
+                    <button class="danger2"
                             @click="clear">
                         Cancel
                     </button>
                 </center>
-            </div>
+            
         </div>
     
     </q-layout>
@@ -88,8 +97,12 @@ export default {
     margin-top: 1.45rem;
     background-color: white;
     
-    
+
 }
+span.q-tab-label{
+    color: white;
+}
+
 button.primary {
     background: #131717;
     color: #f5fbff;
@@ -97,6 +110,20 @@ button.primary {
 button.danger {
     background: #b91515;
     color: #f5fbff;
+}
+button.primary2 {
+    background: #2196f3;
+    color: white;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 700;
+    margin-right: 132px !important;
+}
+button.danger2 {
+    background: #b91515;
+    color: white;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 700;
+    margin-left: 0 !important;
 }
 input, textarea, select, button {
     text-rendering: auto;
@@ -119,6 +146,15 @@ input, textarea, select, button {
     line-height: 1.5;
     color: #566b78;
   }
+
+.full-width {
+    width: 80% !important;
+    height: 50px;
+    padding: 1px;
+    margin-left: 26px !important;
+    margin-right: 0 !important;
+}
+
 
 
 </style>

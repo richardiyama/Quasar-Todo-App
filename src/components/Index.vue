@@ -14,7 +14,7 @@
             <br>
             <br>
             <br>
-            <span><i id="tagline1">dashboard</i>Dashboard</span>
+            <span id="tagline1">Dashboard</span>
             <br>
             <br>
             <br>
@@ -28,37 +28,71 @@
         </div>
       </q-drawer>
       <q-toolbar-title :padding="1">
-        Orb Solution Todo List
+      Everything
       </q-toolbar-title>
     </div>
   
     <div class="layout-view">
       <q-search class="default"
                 v-model="$store.state.search"></q-search>
-      <br>
-      <br>
-      <center>
-        <div>Completed Tasks: {{Todos.filter(i => {return i.status == true}).length}}</div>
-        <div>Tasks In Progress : {{Todos.filter(i => {return i.status == false}).length}}</div>
-      </center>
-      <br>
+      
+     
+      
+      <div id="tagline5" class="list-label">Today</div>
+      <div v-for="j in TodayTask"
+           :key="j.id"
+           class="item"
+           v-show="!j.status">
   
-      <div v-for="i in Todos"
+        <div class="item">
+  
+          <div class="list">
+            <label class="item">
+              <div class="item-content">
+                <div class="item-primary">
+                  <button @click.prevent="CompleteTask(j.id)"><i id="tagline7" class="material-icons">&#xE836;</i></button> {{j.title}}
+                  <br><span id="tagline6">wed June 1</span></div>
+              </div>
+            </label>
+          </div>
+        </div>
+  
+        <div class="item-icons item-secondary">
+          <div>
+            <q-fab classNames="primary"
+                   icon="keyboard_arrow_left"
+                   direction="left"
+                   style="right: 18px; bottom: 18px;">
+              <q-small-fab class="white"
+                           @click.native="onEdit(j.id)"
+                           icon="edit"></q-small-fab>
+              <q-small-fab class="white"
+                           @click.native="deleteItem(j.id)"
+                           icon="delete">
+              </q-small-fab>
+            </q-fab>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="layout-view">
+  <div id="tagline5" class="list-label">Tomorrow</div>
+      <div v-for="i in TommorrowTask"
            :key="i.id"
            class="item"
            v-show="!i.status">
   
         <div class="item">
   
-          
           <div class="list">
             <label class="item">
               <div class="item-content">
-                
-            <div class="item-primary"><button @click.prevent="CompleteTask(i.id)"><i class="material-icons">&#xE836;</i></button> {{i.title}}</div>
+                <div class="item-primary">
+                  <button @click.prevent="CompleteTask(i.id)"><i id="tagline8" class="material-icons">&#xE836;</i><i id="tagline" class="material-icons">star</i></button> {{i.title}}
+                  <br><span id="tagline6">Thur June 2, 9:00 AM</span></div>
               </div>
             </label>
-              </div>
+          </div>
         </div>
   
         <div class="item-icons item-secondary">
@@ -77,20 +111,53 @@
             </q-fab>
           </div>
         </div>
- 
-
       </div>
-      
+      <br>
 
-
- 
-   <br>
-   <button @click="$router.push('/Add')" class="primary1 circular">
-  <i>add</i>
-  </button>
- 
- 
-      
+      <div class="layout-view">
+  <div id="tagline5" class="list-label">Next Seven Days</div>
+      <div v-for="i in TommorrowTask"
+           :key="i.id"
+           class="item"
+           v-show="!i.status">
+  
+        <div class="item">
+  
+          <div class="list">
+            <label class="item">
+              <div class="item-content">
+                <div class="item-primary">
+                  <button @click.prevent="CompleteTask(i.id)"><i id="tagline9" class="material-icons">&#xE836;</i></button> {{i.title}}
+                  <br><span id="tagline6">Fri June 3</span></div>
+              </div>
+            </label>
+          </div>
+        </div>
+  
+        <div class="item-icons item-secondary">
+          <div>
+            <q-fab classNames="primary"
+                   icon="keyboard_arrow_left"
+                   direction="left"
+                   style="right: 18px; bottom: 18px;">
+              <q-small-fab class="white"
+                           @click.native="onEdit(i.id)"
+                           icon="edit"></q-small-fab>
+              <q-small-fab class="white"
+                           @click.native="deleteItem(i.id)"
+                           icon="delete">
+              </q-small-fab>
+            </q-fab>
+          </div>
+        </div>
+      </div>
+  
+      <br>
+      <button @click="$router.push('/Add')"
+              class="primary1 circular">
+        <i>add</i>
+      </button>
+  
   </q-layout>
 </template>
 
@@ -108,7 +175,12 @@ export default {
   computed: {
 
 
-    Todos() {
+    TodayTask() {
+      return this.$store.getters.filteredTasks
+    },
+
+
+    TommorrowTask() {
       return this.$store.getters.filteredTasks
     }
   },
@@ -160,20 +232,68 @@ export default {
 
 </script>
 <style>
+
+#tagline{
+  color: goldenrod;
+}
 #tagline3 {
   color: #2196f3;
   margin: 1px;
+  font-size: 30px;
+}
+
+#tagline5 {
+  color: #2196f3;
+  margin: 1px;
+  font-size: 15px;
+}
+#tagline6 {
+  
+  margin: 70px;
+  font-size: 13px;
+  line-height: 1;
+
+}
+
+
+#tagline4 {
+
+  margin: 1px;
+  top: px;
 }
 
 #tagline1 {
   color: #2196f3;
-  margin: 1px;
+  width: 90px;
+  font-size: 30px;
+  left: 100px;
 }
 
+#tagline7 {
+  color: #2196f3;
+  width: 40px;
+  font-size: 30px;
+  left: 100px;
+}
+
+#tagline8 {
+  color: #38b93d;
+  width: 40px;
+  font-size: 30px;
+  left: 100px;
+}
+
+#tagline9 {
+  color: yellow;
+  width: 40px;
+  font-size: 30px;
+  left: 100px;
+}
 
 #tagline2 {
   color: #2196f3;
-  margin: 1px
+  margin: 1px;
+  font-size: 30px;
 }
 
 .drawer-content {
@@ -215,7 +335,7 @@ export default {
 .item .item-content q-checkbox {
   width: 100%;
   margin: 0;
-   height: 44px;
+  height: 44px;
   min-height: 0;
 }
 
@@ -235,6 +355,7 @@ export default {
 
 .item {
   color: black;
+  height: 56px;
 }
 
 .item p i:first-child {
@@ -263,15 +384,15 @@ button.primary1 {
   color: white;
   height: 60px;
   width: 60px;
-  right:  50px;
+  right: 25px;
 }
 
 
 .list {
-    text-align: center;
-    border: 1px solid hsla(0, 4%, 43%, 0.16);
-    margin: 6px;
-    background-color: white;
+  text-align: center;
+  border: 1px solid hsla(0, 4%, 43%, 0.16);
+  margin: 6px;
+  background-color: white;
 }
 
 .q-fab-icon,
@@ -284,8 +405,9 @@ button.circular.raised.primary {
   background: #2196f3;
   color: white;
 }
-button.hide-on-drawer-visible{
-   background: #2196f3;
+
+button.hide-on-drawer-visible {
+  background: #2196f3;
 }
 
 .toolbar {
@@ -325,7 +447,11 @@ div.list-header {
   color: black;
 }
 
+div.item-primary {
+line-height: 0.5;
+margin: 2px;
+padding: 1px;
+margin-left: 1px;
 
-
-
+}
 </style>

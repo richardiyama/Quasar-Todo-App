@@ -14,31 +14,32 @@
         </div>
         <div class="layout-view">
             <br>
-            <br>
-            
-            <br>
+    
             <br>
             <br>
-            <div class="floating-label">
+            <br>
+         
+                <br>
+                <br>
+    
                 <input v-model="$store.state.title"
                        @keyup.enter="edit"
                        required
-                       class="full-width">
-                <label id="tagline">Edit Todo</label>
-                <br>
-                <br>
+                       class="full-width" placeholder="Edit Todo">
+            
+                
                 <br>
                 <br>
                 <br>
                 <br>
                 <center>
-                    <button class="primary"
+                    <button class="primary3"
                             @click="edit">
-                        update
+                        Update
                     </button>
-                    <button class="danger"
+                    <button class="danger3"
                             @click="clear">
-                        cancel
+                        Cancel
                     </button>
                 </center>
             </div>
@@ -89,6 +90,23 @@ mounted() {
     
     
 }
+span.q-tab-label{
+    color: white;
+}
+button.primary3 {
+    background: #2196f3;
+    color: white;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 700;
+    margin-right: 132px !important;
+}
+button.danger3 {
+    background: #b91515;
+    color: white;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 700;
+    margin-left: 0 !important;
+}
 button.primary {
     background: #131717;
     color: #f5fbff;
@@ -118,6 +136,14 @@ input, textarea, select, button {
     line-height: 1.5;
     color: #566b78;
   }
+
+.full-width {
+    width: 80% !important;
+    height: 50px;
+    padding: 1px;
+    margin-left: 26px !important;
+    margin-right: 0 !important;
+}
 
 
 </style>

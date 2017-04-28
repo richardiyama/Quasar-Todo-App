@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { LocalStorage, Toast } from 'quasar'
 import _ from 'lodash'
+import moment from 'moment'
 
 Vue.use(Vuex)
 
@@ -15,7 +16,9 @@ const state = {
   id: 0,
   title: '',
   taskList: LocalStorage.get.item('tasks', []) || [],
-  search: ''
+  search: '',
+  date: moment().format(),
+  time: moment().format()
 }
 
 const actions = {
@@ -63,7 +66,9 @@ const mutations = {
     var newTask = {
       id: counter(),
       title: state.title,
-      status: false
+      status: false,
+      date: state.date,
+      time: state.time
     }
     state.taskList.push(newTask)
     console.log(state.taskList)
