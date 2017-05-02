@@ -27,6 +27,7 @@
                        @keyup.enter="add"
                        required
                        class="full-width" placeholder="New Todo">
+                       <label>
              <input type="date" v-model="$store.state.date"
                        @keyup.enter="add"
                        required

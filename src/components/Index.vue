@@ -2,43 +2,18 @@
   <q-layout>
     <div slot="header"
          class="toolbar">
-      <button class="hide-on-drawer-visible"
-              @click="$refs.drawer.open()">
-        <i>menu</i>
-      </button>
-      <q-drawer class="bg-secondary"
-                ref="drawer">
-        <div class="list platform-delimiter">
-          <div class="list-header">
-            <br>
-            <br>
-            <br>
-            <br>
-            <span id="tagline1">Dashboard</span>
-            <br>
-            <br>
-            <br>
-            <br>
-          </div>
   
-          <q-drawer-link to="/"> <i id="tagline3">update</i>Tasks</q-drawer-link>
-          <br>
-          <br>
-          <q-drawer-link to="/Add"><i id="tagline2">create</i>Create Tasks</q-drawer-link>
-        </div>
-      </q-drawer>
       <q-toolbar-title :padding="1">
-      Everything
+        Everything
       </q-toolbar-title>
     </div>
   
     <div class="layout-view">
       <q-search class="default"
                 v-model="$store.state.search"></q-search>
-      
-     
-      
-      <div id="tagline5" class="list-label">Today</div>
+  
+      <div id="tagline5"
+           class="list-label">Today</div>
       <div v-for="j in TodayTask"
            :key="j.id"
            class="item"
@@ -50,113 +25,72 @@
             <label class="item">
               <div class="item-content">
                 <div class="item-primary">
-                  <button @click.prevent="CompleteTask(j.id)"><i id="tagline7" class="material-icons">&#xE836;</i></button> {{j.title}}
-                  <br><span id="tagline6">wed June 1</span></div>
+                  <button @click.prevent="CompleteTask(j.id)"><i id="tagline7"
+                       class="material-icons">&#xE836;</i></button>{{j.title}}
+                  <span id="tagline6"><p id="taglin14">wed June 1</p></span></div>
               </div>
             </label>
           </div>
         </div>
   
-        <div class="item-icons item-secondary">
-          <div>
-            <q-fab classNames="primary"
-                   icon="keyboard_arrow_left"
-                   direction="left"
-                   style="right: 18px; bottom: 18px;">
-              <q-small-fab class="white"
-                           @click.native="onEdit(j.id)"
-                           icon="edit"></q-small-fab>
-              <q-small-fab class="white"
-                           @click.native="deleteItem(j.id)"
-                           icon="delete">
-              </q-small-fab>
-            </q-fab>
-          </div>
-        </div>
       </div>
       <br>
       <div class="layout-view">
-  <div id="tagline5" class="list-label">Tomorrow</div>
-      <div v-for="i in TommorrowTask"
-           :key="i.id"
-           class="item"
-           v-show="!i.status">
+        <div id="tagline5"
+             class="list-label">Tomorrow</div>
+        <div v-for="i in TommorrowTask"
+             :key="i.id"
+             class="item"
+             v-show="!i.status">
   
-        <div class="item">
+          <div class="item">
   
-          <div class="list">
-            <label class="item">
-              <div class="item-content">
-                <div class="item-primary">
-                  <button @click.prevent="CompleteTask(i.id)"><i id="tagline8" class="material-icons">&#xE836;</i><i id="tagline" class="material-icons">star</i></button> {{i.title}}
-                  <br><span id="tagline6">Thur June 2, 9:00 AM</span></div>
+            <div class="list">
+              <label class="item">
+                <div class="item-content">
+                  <div class="item-primary">
+                    <button @click.prevent="CompleteTask(i.id)"><i id="tagline20"
+                         class="material-icons">&#xE836;</i><i id="tagline"
+                         class="material-icons">star_rate</i></button> {{i.title}}
+                    <span id="tagline6"><p id="taglin">Thur June 2, 9:00 AM<i id="taglin60" class="material-icons">notifications</i><i  id="taglin61" class="material-icons">chat</i></p></span></div>
+                </div>
+              </label>
+            </div>
+          </div>
+  
+        </div>
+        <br>
+  
+        <div class="layout-view">
+          <div id="tagline5"
+               class="list-label">Next Seven Days</div>
+          <div v-for="i in TommorrowTask"
+               :key="i.id"
+               class="item"
+               v-show="!i.status">
+  
+            <div class="item">
+  
+              <div class="list">
+                <label class="item">
+                  <div class="item-content">
+                    <div class="item-primary">
+                      <button @click.prevent="CompleteTask(i.id)"><i id="tagline9"
+                           class="material-icons">&#xE836;</i></button><i id="tagline10"
+                         class="material-icons">view_headline</i>{{i.title}}
+                      <span id="tagline6"><p id="taglin91">Fri June 3</p></span></div>
+                  </div>
+                </label>
               </div>
-            </label>
+            </div>
+  
           </div>
-        </div>
   
-        <div class="item-icons item-secondary">
-          <div>
-            <q-fab classNames="primary"
-                   icon="keyboard_arrow_left"
-                   direction="left"
-                   style="right: 18px; bottom: 18px;">
-              <q-small-fab class="white"
-                           @click.native="onEdit(i.id)"
-                           icon="edit"></q-small-fab>
-              <q-small-fab class="white"
-                           @click.native="deleteItem(i.id)"
-                           icon="delete">
-              </q-small-fab>
-            </q-fab>
-          </div>
-        </div>
-      </div>
-      <br>
-
-      <div class="layout-view">
-  <div id="tagline5" class="list-label">Next Seven Days</div>
-      <div v-for="i in TommorrowTask"
-           :key="i.id"
-           class="item"
-           v-show="!i.status">
-  
-        <div class="item">
-  
-          <div class="list">
-            <label class="item">
-              <div class="item-content">
-                <div class="item-primary">
-                  <button @click.prevent="CompleteTask(i.id)"><i id="tagline9" class="material-icons">&#xE836;</i></button> {{i.title}}
-                  <br><span id="tagline6">Fri June 3</span></div>
-              </div>
-            </label>
-          </div>
-        </div>
-  
-        <div class="item-icons item-secondary">
-          <div>
-            <q-fab classNames="primary"
-                   icon="keyboard_arrow_left"
-                   direction="left"
-                   style="right: 18px; bottom: 18px;">
-              <q-small-fab class="white"
-                           @click.native="onEdit(i.id)"
-                           icon="edit"></q-small-fab>
-              <q-small-fab class="white"
-                           @click.native="deleteItem(i.id)"
-                           icon="delete">
-              </q-small-fab>
-            </q-fab>
-          </div>
-        </div>
-      </div>
-  
-      <br>
-      <button @click="$router.push('/Add')"
-              class="primary1 circular">
-        <i>add</i>
-      </button>
+          <br>
+          <button @click="$router.push('/Add')"
+                  class="primary1 circular">
+            <i>add</i>
+          </button>
   
   </q-layout>
 </template>
@@ -232,10 +166,13 @@ export default {
 
 </script>
 <style>
-
-#tagline{
+#tagline {
   color: goldenrod;
+  width: 2px;
+  font-size: 15px;
+  line-height: 0.8;
 }
+
 #tagline3 {
   color: #2196f3;
   margin: 1px;
@@ -244,22 +181,64 @@ export default {
 
 #tagline5 {
   color: #2196f3;
-  margin: 1px;
+  margin: 15px;
   font-size: 15px;
-}
-#tagline6 {
+  padding: 1px;
+line-height: 1px;
   
-  margin: 70px;
-  font-size: 13px;
-  line-height: 1;
+}
 
+#tagline6 {
+  margin: 70px;
+  font-size: 9px;
+  line-height: 0;
+}
+
+#taglin {
+  text-align: right;
+  font-size: 9px;
+  color: gray;
+  margin: 1px;
+  width: 160px;
+  line-height: 0.1;
+}
+#taglin60 {
+
+  font-size: 9px;
+  color: gray;
+
+  
+  
+}
+
+#taglin61 {
+  font-size: 9px;
+  color: gray;
+}
+
+#taglin14 {
+  text-align: right;
+  font-size: 9px;
+  margin: 1px;
+  width: 98px;
+  line-height: 0;
+  color: gray;
+  
+}
+
+#taglin91 {
+  text-align: right;
+  font-size: 9px;
+  margin: 1px;
+  width: 90px;
+  line-height: 0;
+  color: gray;
 }
 
 
 #tagline4 {
 
   margin: 1px;
-  top: px;
 }
 
 #tagline1 {
@@ -271,23 +250,30 @@ export default {
 
 #tagline7 {
   color: #2196f3;
-  width: 40px;
+  width: 20px;
   font-size: 30px;
   left: 100px;
 }
 
-#tagline8 {
+#tagline20 {
   color: #38b93d;
-  width: 40px;
+  width: 30px;
+
   font-size: 30px;
   left: 100px;
 }
 
 #tagline9 {
   color: yellow;
-  width: 40px;
+  width: 16px;
   font-size: 30px;
   left: 100px;
+}
+
+#tagline10 {
+  color: yellow;
+  width: 20px;
+  font-size: 15px;
 }
 
 #tagline2 {
@@ -354,8 +340,8 @@ export default {
 }
 
 .item {
-  color: black;
-  height: 56px;
+  color: darkslategray;
+  height: 55.1px;
 }
 
 .item p i:first-child {
@@ -390,9 +376,9 @@ button.primary1 {
 
 .list {
   text-align: center;
-  border: 1px solid hsla(0, 4%, 43%, 0.16);
   margin: 6px;
   background-color: white;
+  
 }
 
 .q-fab-icon,
@@ -445,13 +431,21 @@ div.list-header {
   line-height: 1.5;
   background: snow;
   color: black;
+  
+}
+
+label.item {
+  margin-right: 1px;
+  text-align: left;
+  height: 44px;
+
 }
 
 div.item-primary {
-line-height: 0.5;
-margin: 2px;
-padding: 1px;
-margin-left: 1px;
+  line-height: 0.6;
+  margin: 2px;
+  margin-left: 1px;
 
 }
+
 </style>
