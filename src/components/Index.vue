@@ -2,15 +2,29 @@
   <q-layout>
     <div slot="header"
          class="toolbar">
-  
-      <q-toolbar-title :padding="1">
+      <button class="default"
+              @click="clickMethod()">
+        <i id="tag"
+           class="material-icons">keyboard_arrow_left</i>
+      </button>
+      <hr>
+      <hr>
+      <hr>
+       <hr>
+      <hr>
+      <hr>
+      <label id="Back">Back</label>
+      <q-toolbar-title :padding="1"id="Back">
         Everything
       </q-toolbar-title>
+<q-search class="default"
+                v-model="$store.state.search"></q-search>
+      <label id="Back">Edit</label>
     </div>
+    
   
     <div class="layout-view">
-      <q-search class="default"
-                v-model="$store.state.search"></q-search>
+      
   
       <div id="tagline5"
            class="list-label">Today</div>
@@ -167,7 +181,7 @@ export default {
 </script>
 <style>
 #tagline {
-  color: goldenrod;
+  color: #ffbc04;
   width: 2px;
   font-size: 15px;
   line-height: 0.8;
@@ -180,12 +194,11 @@ export default {
 }
 
 #tagline5 {
-  color: #2196f3;
-  margin: 15px;
+  color: #5188ae;
+  margin: 6px;
   font-size: 15px;
   padding: 1px;
-line-height: 1px;
-  
+  line-height: 1px;
 }
 
 #tagline6 {
@@ -202,14 +215,14 @@ line-height: 1px;
   width: 160px;
   line-height: 0.1;
 }
+
 #taglin60 {
 
   font-size: 9px;
   color: gray;
-
-  
-  
 }
+
+
 
 #taglin61 {
   font-size: 9px;
@@ -223,7 +236,6 @@ line-height: 1px;
   width: 98px;
   line-height: 0;
   color: gray;
-  
 }
 
 #taglin91 {
@@ -249,14 +261,28 @@ line-height: 1px;
 }
 
 #tagline7 {
-  color: #2196f3;
+  color: #2095f4;
   width: 20px;
   font-size: 30px;
   left: 100px;
+  
+}
+
+#tag {
+  width: 20px;
+  font-size: 50px;
+  left: 100px;
+}
+
+#Back {
+
+  font-size: 17px;
+  color: #d4ebfd;
+  
 }
 
 #tagline20 {
-  color: #38b93d;
+  color: #67bc6a;
   width: 30px;
 
   font-size: 30px;
@@ -264,14 +290,14 @@ line-height: 1px;
 }
 
 #tagline9 {
-  color: yellow;
+  color: #fec21b;
   width: 16px;
   font-size: 30px;
   left: 100px;
 }
 
 #tagline10 {
-  color: yellow;
+  color: #fec21b;
   width: 20px;
   font-size: 15px;
 }
@@ -282,28 +308,10 @@ line-height: 1px;
   font-size: 30px;
 }
 
-.drawer-content {
-  z-index: 30;
-  position: fixed;
-  background: #566b78;
-  top: 0;
-  bottom: 0;
-  width: 260px;
-  font-size: 1rem;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  will-change: scroll-position, transform;
-}
 
-.drawer-content.left-side {
-  left: 0;
-  -webkit-transform: translateX(-260px);
-  transform: translateX(-260px);
-  background-color: snow;
-}
 
 .q-toolbar-title {
-  background-color: #EBEBEB;
+  color: #d4ebfd;
 }
 
 .q-search {
@@ -378,7 +386,6 @@ button.primary1 {
   text-align: center;
   margin: 6px;
   background-color: white;
-  
 }
 
 .q-fab-icon,
@@ -388,8 +395,8 @@ button.primary1 {
 }
 
 button.circular.raised.primary {
-  background: #2196f3;
-  color: white;
+  background: #00c853;
+  color: #daf5e4;
 }
 
 button.hide-on-drawer-visible {
@@ -405,6 +412,8 @@ button.hide-on-drawer-visible {
   background: #2196f3;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 500px;
+  width: 1px;
+  
 }
 
 div.list-header {
@@ -431,21 +440,17 @@ div.list-header {
   line-height: 1.5;
   background: snow;
   color: black;
-  
 }
 
 label.item {
   margin-right: 1px;
   text-align: left;
   height: 44px;
-
 }
 
 div.item-primary {
   line-height: 0.6;
   margin: 2px;
   margin-left: 1px;
-
 }
-
 </style>
