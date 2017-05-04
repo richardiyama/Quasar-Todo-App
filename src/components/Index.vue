@@ -7,25 +7,20 @@
         <i id="tag"
            class="material-icons">keyboard_arrow_left</i>
       </button>
-      <hr>
-      <hr>
-      <hr>
-       <hr>
-      <hr>
-      <hr>
+  
       <label id="Back">Back</label>
-      <q-toolbar-title :padding="1"id="Back">
+      <q-toolbar-title :padding="1"
+                       id="LeftBack">
         Everything
       </q-toolbar-title>
-<q-search class="default"
+  
+      <q-search class="default"
                 v-model="$store.state.search"></q-search>
-      <label id="Back">Edit</label>
+      <label id="EditBack">Edit</label>
     </div>
-    
   
     <div class="layout-view">
-      
-  
+  <br>
       <div id="tagline5"
            class="list-label">Today</div>
       <div v-for="j in TodayTask"
@@ -50,6 +45,7 @@
       </div>
       <br>
       <div class="layout-view">
+        <br>
         <div id="tagline5"
              class="list-label">Tomorrow</div>
         <div v-for="i in TommorrowTask"
@@ -65,8 +61,8 @@
                   <div class="item-primary">
                     <button @click.prevent="CompleteTask(i.id)"><i id="tagline20"
                          class="material-icons">&#xE836;</i><i id="tagline"
-                         class="material-icons">star_rate</i></button> {{i.title}}
-                    <span id="tagline6"><p id="taglin">Thur June 2, 9:00 AM<i id="taglin60" class="material-icons">notifications</i><i  id="taglin61" class="material-icons">chat</i></p></span></div>
+                         class="material-icons">star</i></button> {{i.title}}
+                    <span id="tagline6"><p id="taglin">Thur June 2, 9:00 AM<i id="taglin60" class="material-icons">notifications</i><i  id="taglin61" class="material-icons">chat</i></p></span><span id="badges">BS</span></div>
                 </div>
               </label>
             </div>
@@ -76,6 +72,7 @@
         <br>
   
         <div class="layout-view">
+          <br>
           <div id="tagline5"
                class="list-label">Next Seven Days</div>
           <div v-for="i in TommorrowTask"
@@ -195,10 +192,16 @@ export default {
 
 #tagline5 {
   color: #5188ae;
-  margin: 6px;
+  position: relative;
+  margin: 1px;
   font-size: 15px;
-  padding: 1px;
-  line-height: 1px;
+  font-weight: bold;
+  width:150px;
+  padding: 10px;
+  text-align: left;
+  line-height: 0;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  
 }
 
 #tagline6 {
@@ -209,10 +212,10 @@ export default {
 
 #taglin {
   text-align: right;
-  font-size: 9px;
+  font-size: 11px;
   color: gray;
   margin: 1px;
-  width: 160px;
+  width: 185px;
   line-height: 0.1;
 }
 
@@ -225,15 +228,15 @@ export default {
 
 
 #taglin61 {
-  font-size: 9px;
+  font-size: 15px;
   color: gray;
 }
 
 #taglin14 {
   text-align: right;
-  font-size: 9px;
+  font-size: 11px;
   margin: 1px;
-  width: 98px;
+  width: 105px;
   line-height: 0;
   color: gray;
 }
@@ -265,21 +268,46 @@ export default {
   width: 20px;
   font-size: 30px;
   left: 100px;
-  
 }
 
 #tag {
-  width: 20px;
+  width: 1px;
   font-size: 50px;
-  left: 100px;
+  position: relative;
+
+  right: 0.6em;
+  margin: 0px;
 }
 
 #Back {
 
+  font-size: 18px;
+  color: #d4ebfd;
+  position: relative;
+
+  left: 0.1em;
+  margin: 0px;
+}
+
+#EditBack {
+
+  font-size: 18px;
+  color: #d4ebfd;
+  position: relative;
+
+  left: 0.2em;
+  margin: 0px;
+}
+
+#LeftBack {
+
   font-size: 17px;
   color: #d4ebfd;
-  
+  position: relative;
+  right: 2.6em;
+  margin: 0px;
 }
+
 
 #tagline20 {
   color: #67bc6a;
@@ -316,7 +344,15 @@ export default {
 
 .q-search {
   background-color: #EBEBEB;
+  position: absolute;
+  left: 12em;
+  margin: 0px;
 }
+
+button.q-search-icon span {
+  display: none;
+}
+
 
 .item .item-content {
   max-width: 60%;
@@ -381,6 +417,26 @@ button.primary1 {
   right: 25px;
 }
 
+#badges {
+
+  padding: 1px;
+  position: absolute;
+  right: 0.1em;
+  left:19em;
+  top: 0.1em;
+  width: 40px;
+  line-height: 2.1;
+  text-align: center;
+  border:2px solid lightgray;
+      height: 40px;
+      -webkit-border-radius: 500px;
+      -moz-border-radius: 500px;
+      border-radius: 500px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  
+  font-weight: bold;
+  color: lightgray;
+}
 
 .list {
   text-align: center;
@@ -409,11 +465,13 @@ button.hide-on-drawer-visible {
 }
 
 .q-search-input {
-  background: #2196f3;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  font-weight: 500px;
-  width: 1px;
-  
+  font-weight: 400;
+  padding: 31px;
+  width: 100%;
+}
+
+.q-search-input-container {
+  width: 190px;
 }
 
 div.list-header {
@@ -437,8 +495,8 @@ div.list-header {
 
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-weight: 400px;
-  line-height: 1.5;
-  background: snow;
+  line-height: 0.3;
+  background: #f7f7f7;
   color: black;
 }
 
@@ -446,6 +504,8 @@ label.item {
   margin-right: 1px;
   text-align: left;
   height: 44px;
+  width: 312px;
+  background-color: #fff;
 }
 
 div.item-primary {
