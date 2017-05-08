@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { LocalStorage, Toast } from 'quasar'
 import _ from 'lodash'
-import moment from 'moment'
+
 
 Vue.use(Vuex)
 
@@ -17,8 +17,7 @@ const state = {
   title: '',
   taskList: LocalStorage.get.item('tasks', []) || [],
   search: '',
-  date: moment().format(),
-  time: moment().format()
+  date: ''
 }
 
 const actions = {
@@ -29,9 +28,7 @@ const actions = {
 
   deleteItem: ({ commit }, id) => commit('deleteItem', id)
 
-
 }
-
 
 const getters = {
   filteredTasks (state) {
@@ -67,8 +64,7 @@ const mutations = {
       id: counter(),
       title: state.title,
       status: false,
-      date: state.date,
-      time: state.time
+      date: state.date
     }
     state.taskList.push(newTask)
     console.log(state.taskList)
@@ -102,10 +98,6 @@ const mutations = {
 
     LocalStorage.set('tasks', state.taskList)
   }
-
-
-
-
 }
 
 export default new Vuex.Store({

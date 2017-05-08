@@ -20,13 +20,13 @@
     </div>
   
     <div class="layout-view">
-  <br>
+      <br>
       <div id="tagline5"
-           class="list-label">Today</div>
+           class="list-label" v-show="TodayTask.filter.length > 1">Today</div>
       <div v-for="j in TodayTask"
            :key="j.id"
            class="item"
-           v-show="!j.status">
+           v-show="!j.status && (NextDay(j.date) === 0)">
   
         <div class="item">
   
@@ -47,11 +47,11 @@
       <div class="layout-view">
         <br>
         <div id="tagline5"
-             class="list-label">Tomorrow</div>
+             class="list-label" v-show="!TommorrowTask.length > 0">Tomorrow</div>
         <div v-for="i in TommorrowTask"
              :key="i.id"
              class="item"
-             v-show="!i.status">
+             v-show="!i.status && (NextDay(i.date) === 1)">
   
           <div class="item">
   
@@ -74,11 +74,11 @@
         <div class="layout-view">
           <br>
           <div id="tagline5"
-               class="list-label">Next Seven Days</div>
+               class="list-label" v-show="TommorrowTask.filter.length > 1">Next Seven Days</div>
           <div v-for="i in TommorrowTask"
                :key="i.id"
                class="item"
-               v-show="!i.status">
+               v-show="!i.status && (NextDay(i.date) === 7)">
   
             <div class="item">
   
@@ -89,7 +89,7 @@
                       <button @click.prevent="CompleteTask(i.id)"><i id="tagline9"
                            class="material-icons">&#xE836;</i></button><i id="tagline10"
                          class="material-icons">view_headline</i>{{i.title}}
-                      <span id="tagline6"><p id="taglin91">Fri June 3</p></span></div>
+                      <span id="tagline6"><p id="taglin91">{{date(i.date)}}</p></span></div>
                   </div>
                 </label>
               </div>
@@ -109,12 +109,13 @@
 <script>
 import _ from 'lodash'
 import Quasar, { Utils, Dialog, LocalStorage, Toast } from 'quasar'
+import moment from 'moment'
 
 export default {
 
   data() {
     return {
-
+     toggle : this.$store.state.date
     }
   },
   computed: {
@@ -131,6 +132,23 @@ export default {
   },
 
   methods: {
+   
+     moment: function (date) {
+      return moment(date);
+    },
+    date: function (date) {
+      return moment(date).format('MMMM D, h:mm a');
+    },
+
+    NextDay : function (date){
+     var a = moment(date).format('D')
+     var b = moment().format('D')
+     console.log(a)
+     console.log(b)
+     console.log(a - b)
+     return (a - b)
+
+    },
     onEdit(id) {
       console.log("edit:", id)
       this.$store.state.id = id
@@ -196,12 +214,11 @@ export default {
   margin: 1px;
   font-size: 15px;
   font-weight: bold;
-  width:150px;
+  width: 150px;
   padding: 10px;
   text-align: left;
   line-height: 0;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  
 }
 
 #tagline6 {
@@ -422,18 +439,18 @@ button.primary1 {
   padding: 1px;
   position: absolute;
   right: 0.1em;
-  left:19em;
+  left: 19em;
   top: 0.1em;
   width: 40px;
   line-height: 2.1;
   text-align: center;
-  border:2px solid lightgray;
-      height: 40px;
-      -webkit-border-radius: 500px;
-      -moz-border-radius: 500px;
-      border-radius: 500px;
+  border: 2px solid lightgray;
+  height: 40px;
+  -webkit-border-radius: 500px;
+  -moz-border-radius: 500px;
+  border-radius: 500px;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  
+
   font-weight: bold;
   color: lightgray;
 }

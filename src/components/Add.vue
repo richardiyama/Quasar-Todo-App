@@ -32,11 +32,6 @@
                        @keyup.enter="add"
                        required
                        class="full-width">
-
-                     <input type="time" v-model="$store.state.time"
-                       @keyup.enter="add"
-                       required
-                       class="full-width">  
                 
                 <br>
                 <br>
@@ -62,6 +57,7 @@
 <script>
 import _ from 'lodash'
 import Quasar, { Utils, Dialog, LocalStorage, Toast } from 'quasar'
+
 
 export default {
     methods: {
