@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { LocalStorage, Toast } from 'quasar'
 import _ from 'lodash'
-
+import moment from 'moment'
 
 Vue.use(Vuex)
 
@@ -12,10 +12,24 @@ function counter () {
   return lastCount
 }
 
+
+
+function NextDay (date) {
+  var a = moment(date).format('D')
+  var b = moment().format('D')
+  console.log(a)
+  console.log(b)
+  console.log(a - b)
+  return (a - b)
+}
+
 const state = {
   id: 0,
   title: '',
   taskList: LocalStorage.get.item('tasks', []) || [],
+  TodayTask: LocalStorage.get.item('Todaytasks', []) || [],
+  TomorrowTask: LocalStorage.get.item('Tomorrowtasks', []) || [],
+  NextSevenDayTask: LocalStorage.get.item('NextSevenDaytasks', []) || [],
   search: '',
   date: ''
 }
@@ -49,8 +63,67 @@ const getters = {
     }
 
     return state.taskList
-  }
+  },
 
+  todayTasks (state) {
+    function filter (arrayInTaskList, Searchterm) {
+      retv = []
+      for (var i = 0; i < arrayInTaskList.length; i++) {
+        var title = arrayInTaskList[i]['title'].toLowerCase()
+        if (title.indexOf(Searchterm.toLowerCase()) !== -1) {
+          retv.push(arrayInTaskList[i])
+        }
+      }
+      return retv
+    }
+
+    if (state.search.length > 0) {
+      var retv = filter(state.TodayTask, state.search)
+      return retv
+    }
+
+    return state.TodayTask
+  },
+
+  tomorrowTasks (state) {
+    function filter (arrayInTaskList, Searchterm) {
+      retv = []
+      for (var i = 0; i < arrayInTaskList.length; i++) {
+        var title = arrayInTaskList[i]['title'].toLowerCase()
+        if (title.indexOf(Searchterm.toLowerCase()) !== -1) {
+          retv.push(arrayInTaskList[i])
+        }
+      }
+      return retv
+    }
+
+    if (state.search.length > 0) {
+      var retv = filter(state.TomorrowTask, state.search)
+      return retv
+    }
+
+    return state.TomorrowTask
+  },
+
+  nextSevenDaysTasks (state) {
+    function filter (arrayInTaskList, Searchterm) {
+      retv = []
+      for (var i = 0; i < arrayInTaskList.length; i++) {
+        var title = arrayInTaskList[i]['title'].toLowerCase()
+        if (title.indexOf(Searchterm.toLowerCase()) !== -1) {
+          retv.push(arrayInTaskList[i])
+        }
+      }
+      return retv
+    }
+
+    if (state.search.length > 0) {
+      var retv = filter(state.NextSevenDayTask, state.search)
+      return retv
+    }
+
+    return state.NextSevenDayTask
+  }
 }
 
 const mutations = {
@@ -66,11 +139,36 @@ const mutations = {
       status: false,
       date: state.date
     }
-    state.taskList.push(newTask)
-    console.log(state.taskList)
-    LocalStorage.set('tasks', state.taskList)
-    Toast.create('success')
-    state.title = ''
+    if (NextDay(state.date) === 0) {
+      state.TodayTask.push(newTask)
+      console.log(state.TodayTask)
+      LocalStorage.set('Todaytasks', state.TodayTask)
+      Toast.create('success')
+      state.title = ''
+    }
+
+    else if (NextDay(state.date) === 1) {
+      state.TomorrowTask.push(newTask)
+      console.log(state.TodayTask)
+      LocalStorage.set('Tomorrowtasks', state.TomorrowTask)
+      Toast.create('success')
+      state.title = ''
+    }
+
+    else if (NextDay(state.date) === 7) {
+      state.NextSevenDayTask.push(newTask)
+      console.log(state.TodayTask)
+      LocalStorage.set('NextSevenDaytasks', state.NextSevenDayTask)
+      Toast.create('success')
+      state.title = ''
+    }
+    else {
+      state.taskList.push(newTask)
+      console.log(state.taskList)
+      LocalStorage.set('tasks', state.taskList)
+      Toast.create('success')
+      state.title = ''
+    }
   },
 
   edit (state, id) {

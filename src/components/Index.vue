@@ -16,17 +16,51 @@
   
       <q-search class="default"
                 v-model="$store.state.search"></q-search>
-      <label id="EditBack">Edit</label>
+          <q-tabs>
+                <q-tab id="EditBack" icon="undo"
+                       route="/Edit"
+                       exact>
+                  Edit
+                </q-tab>
+    
+            </q-tabs>      
     </div>
   
+  <div class="layout-view">
+      <br>
+      <div id="tagline5"
+           class="list-label" v-show="$store.state.taskList.length > 0">Future Task</div>
+      <div v-for="j in FutureTasks"
+           :key="j.id"
+           class="item"
+           v-show="!j.status">
+  
+        <div class="item">
+  
+          <div class="list">
+            <label class="item">
+              <div class="item-content">
+                <div class="item-primary">
+                  <input type="radio" name="radio" onchange='setVal(this.value)' value='23'>
+                  <i id="tagline7"
+                       class="material-icons">&#xE836;</i>{{j.title}}
+                  <span id="tagline6"><p id="taglin14">{{date(j.date)}}</p></span></div>
+              </div>
+            </label>
+          </div>
+        </div>
+  
+      </div>
+      <br>
+
     <div class="layout-view">
       <br>
       <div id="tagline5"
-           class="list-label" v-show="TodayTask.filter.length > 1">Today</div>
+           class="list-label" v-show="$store.state.TodayTask.length > 0">Today</div>
       <div v-for="j in TodayTask"
            :key="j.id"
            class="item"
-           v-show="!j.status && (NextDay(j.date) === 0)">
+           v-show="!j.status">
   
         <div class="item">
   
@@ -36,7 +70,7 @@
                 <div class="item-primary">
                   <button @click.prevent="CompleteTask(j.id)"><i id="tagline7"
                        class="material-icons">&#xE836;</i></button>{{j.title}}
-                  <span id="tagline6"><p id="taglin14">wed June 1</p></span></div>
+                  <span id="tagline6"><p id="taglin14">{{date(j.date)}}</p></span></div>
               </div>
             </label>
           </div>
@@ -47,11 +81,11 @@
       <div class="layout-view">
         <br>
         <div id="tagline5"
-             class="list-label" v-show="!TommorrowTask.length > 0">Tomorrow</div>
+             class="list-label" v-show="$store.state.TomorrowTask.length > 0">Tomorrow</div>
         <div v-for="i in TommorrowTask"
              :key="i.id"
              class="item"
-             v-show="!i.status && (NextDay(i.date) === 1)">
+             v-show="!i.status">
   
           <div class="item">
   
@@ -59,10 +93,10 @@
               <label class="item">
                 <div class="item-content">
                   <div class="item-primary">
-                    <button @click.prevent="CompleteTask(i.id)"><i id="tagline20"
-                         class="material-icons">&#xE836;</i><i id="tagline"
-                         class="material-icons">star</i></button> {{i.title}}
-                    <span id="tagline6"><p id="taglin">Thur June 2, 9:00 AM<i id="taglin60" class="material-icons">notifications</i><i  id="taglin61" class="material-icons">chat</i></p></span><span id="badges">BS</span></div>
+                    <input type="radio" name="radio" onchange='setVal(this.value)' value='23'>
+                    <i id="tagline20" class="material-icons">&#xE836;</i><i id="tagline"
+                         class="material-icons">star</i>{{i.title}}
+                    <span id="tagline6"><p id="taglin">{{date(i.date)}}<i id="taglin60" class="material-icons">notifications</i><i  id="taglin61" class="material-icons">chat</i></p></span><span id="badges">BS</span></div>
                 </div>
               </label>
             </div>
@@ -74,11 +108,11 @@
         <div class="layout-view">
           <br>
           <div id="tagline5"
-               class="list-label" v-show="TommorrowTask.filter.length > 1">Next Seven Days</div>
-          <div v-for="i in TommorrowTask"
+               class="list-label" v-show="$store.state.NextSevenDayTask.length > 0">Next Seven Days</div>
+          <div v-for="i in NextSevenDayTask"
                :key="i.id"
                class="item"
-               v-show="!i.status && (NextDay(i.date) === 7)">
+               v-show="!i.status">
   
             <div class="item">
   
@@ -86,8 +120,8 @@
                 <label class="item">
                   <div class="item-content">
                     <div class="item-primary">
-                      <button @click.prevent="CompleteTask(i.id)"><i id="tagline9"
-                           class="material-icons">&#xE836;</i></button><i id="tagline10"
+                      <input type="radio" name="radio" onchange='setVal(this.value)' value='23'>
+                      <i id="tagline9" class="material-icons">&#xE836;</i><i id="tagline10"
                          class="material-icons">view_headline</i>{{i.title}}
                       <span id="tagline6"><p id="taglin91">{{date(i.date)}}</p></span></div>
                   </div>
@@ -111,6 +145,8 @@ import _ from 'lodash'
 import Quasar, { Utils, Dialog, LocalStorage, Toast } from 'quasar'
 import moment from 'moment'
 
+
+
 export default {
 
   data() {
@@ -122,33 +158,29 @@ export default {
 
 
     TodayTask() {
-      return this.$store.getters.filteredTasks
+      return this.$store.getters.todayTasks
     },
 
 
     TommorrowTask() {
+      return this.$store.getters.tomorrowTasks
+    },
+
+    NextSevenDayTask() {
+      return this.$store.getters.nextSevenDaysTasks
+    },
+
+    FutureTasks() {
+
       return this.$store.getters.filteredTasks
     }
   },
 
   methods: {
-   
-     moment: function (date) {
-      return moment(date);
-    },
-    date: function (date) {
-      return moment(date).format('MMMM D, h:mm a');
-    },
-
-    NextDay : function (date){
-     var a = moment(date).format('D')
-     var b = moment().format('D')
-     console.log(a)
-     console.log(b)
-     console.log(a - b)
-     return (a - b)
-
-    },
+  
+   date (date) {
+  return moment(date).format('MMMM D, h:mm a')
+},
     onEdit(id) {
       console.log("edit:", id)
       this.$store.state.id = id
@@ -183,13 +215,7 @@ export default {
 
 
   },
-  mounted() {
-
-    // create task store if not exist
-    if (LocalStorage.has('tasks') === false) {
-      LocalStorage.set('tasks', [])
-    }
-  }
+  
 
 }
 
@@ -253,16 +279,16 @@ export default {
   text-align: right;
   font-size: 11px;
   margin: 1px;
-  width: 105px;
+  width: 151px;
   line-height: 0;
   color: gray;
 }
 
 #taglin91 {
   text-align: right;
-  font-size: 9px;
+  font-size: 10px;
   margin: 1px;
-  width: 90px;
+  width: 146px;
   line-height: 0;
   color: gray;
 }
@@ -282,7 +308,7 @@ export default {
 
 #tagline7 {
   color: #2095f4;
-  width: 20px;
+  width: 34px;
   font-size: 30px;
   left: 100px;
 }
