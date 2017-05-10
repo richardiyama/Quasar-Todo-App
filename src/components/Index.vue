@@ -16,14 +16,8 @@
   
       <q-search class="default"
                 v-model="$store.state.search"></q-search>
-          <q-tabs>
-                <q-tab id="EditBack" icon="undo"
-                       route="/Edit"
-                       exact>
-                  Edit
-                </q-tab>
-    
-            </q-tabs>      
+        
+        <button  @click= "Edit($store.state.id)">Edit</button>  
     </div>
   
   <div class="layout-view">
@@ -93,7 +87,7 @@
               <label class="item">
                 <div class="item-content">
                   <div class="item-primary">
-                    <input type="radio" name="radio" onchange='setVal(this.value)' value='23'>
+                    <input type="radio" name="radio">
                     <i id="tagline20" class="material-icons">&#xE836;</i><i id="tagline"
                          class="material-icons">star</i>{{i.title}}
                     <span id="tagline6"><p id="taglin">{{date(i.date)}}<i id="taglin60" class="material-icons">notifications</i><i  id="taglin61" class="material-icons">chat</i></p></span><span id="badges">BS</span></div>
@@ -120,7 +114,7 @@
                 <label class="item">
                   <div class="item-content">
                     <div class="item-primary">
-                      <input type="radio" name="radio" onchange='setVal(this.value)' value='23'>
+                      <input type="radio" name="radio" @click="onEdit(i.id)">
                       <i id="tagline9" class="material-icons">&#xE836;</i><i id="tagline10"
                          class="material-icons">view_headline</i>{{i.title}}
                       <span id="tagline6"><p id="taglin91">{{date(i.date)}}</p></span></div>
@@ -185,10 +179,19 @@ export default {
       console.log("edit:", id)
       this.$store.state.id = id
       var task = _.find(this.$store.state.taskList, { id: id })
+      var NextSevenDaysTasks = _.find(this.$store.state.NextSevenDayTask, { id: id })
       if (task) {
         this.$store.state.title = task.title
       }
-      this.$router.push(`/edit/${id}`)
+
+      else if (NextSevenDaysTasks) {
+        this.$store.state.title = NextSevenDaysTasks.title
+      }
+    
+    },
+    Edit(id){
+ 
+    this.$router.push(`/edit/${id}`)
     },
     deleteItem(id) {
 

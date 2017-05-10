@@ -12,8 +12,6 @@ function counter () {
   return lastCount
 }
 
-
-
 function NextDay (date) {
   var a = moment(date).format('D')
   var b = moment().format('D')
@@ -173,7 +171,9 @@ const mutations = {
 
   edit (state, id) {
     state.taskList = LocalStorage.get.item('tasks')
+    state.NextSevenDayTask = LocalStorage.get.item('NextSevenDaytasks')
     var task = _.find(state.taskList, { id: state.id })
+    var NextSevenDaysTasks = _.find(state.NextSevenDayTask, { id: state.id })
     console.log(id)
     if (state.title === '') {
       Toast.create('Warning!!!...You are trying to submit an empty field')
@@ -183,6 +183,33 @@ const mutations = {
       console.log(state.title)
       task.title = state.title
       LocalStorage.set('tasks', state.taskList)
+      Toast.create('success')
+      state.title = ''
+    }
+
+    else if (NextSevenDaysTasks) {
+      console.log(state.title)
+      NextSevenDaysTasks.title = state.title
+      NextSevenDaysTasks.date = state.date
+      LocalStorage.set('NextSevenDaytasks', state.NextSevenDayTask)
+      Toast.create('success')
+      state.title = ''
+    }
+
+    else if (NextSevenDaysTasks) {
+      console.log(state.title)
+      TomorrowTask.title = state.title
+      TomorrowTask.date = state.date
+      LocalStorage.set('Tomorrowtasks', state.TomorrowTask)
+      Toast.create('success')
+      state.title = ''
+    }
+
+    else if (NextSevenDaysTasks) {
+      console.log(state.title)
+      TodayTask.title = state.title
+      NextSevenDaysTasks.date = state.date
+      LocalStorage.set('Todaytasks', state.TodayTask)
       Toast.create('success')
       state.title = ''
     }

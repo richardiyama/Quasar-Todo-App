@@ -27,7 +27,10 @@
                        required
                        class="full-width" placeholder="Edit Todo">
             
-                
+                <input v-model="$store.state.date"
+                       @keyup.enter="edit"
+                       required
+                       class="full-width" placeholder="Edit Todo">
                 <br>
                 <br>
                 <br>
@@ -55,7 +58,8 @@ import Quasar, { Utils, LocalStorage, Toast } from 'quasar'
 export default {
     data() {
         return {
-            title: this.$store.state.title
+            title: this.$store.state.title,
+            date: this.$store.state.date
         }
     },
 
