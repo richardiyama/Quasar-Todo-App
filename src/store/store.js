@@ -205,6 +205,7 @@ const mutations = {
       state.title = ''
     }
 
+
     else if (NextSevenDaysTasks) {
       console.log(state.title)
       TodayTask.title = state.title
