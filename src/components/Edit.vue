@@ -1,153 +1,100 @@
 <template>
-    <q-layout>
-        <div slot="header"
-             class="toolbar">
+  <q-layout>
+    <div slot="header"
+         class="toolbar">
+      <button class="default"
+              @click="clickMethod()">
+        <i id="tag"
+           class="material-icons">keyboard_arrow_left</i>
+      </button>
+  
+      <label id="Back">Home</label>
+      <q-toolbar-title :padding="1"
+                       id="LeftBack">
+        Edit Task
+      </q-toolbar-title>
+  
+      <q-search class="default"
+                v-model="$store.state.search"></q-search>
+        
     
-            <q-tabs>
-                <q-tab id="tagline" icon="undo"
-                       route="/"
-                       exact>
-                    Back
-                </q-tab>
+    </div>
+
+    <router-view class="layout-view"></router-view>
+
     
-            </q-tabs>
-        </div>
-        <div class="layout-view">
-            <br>
-    
-            <br>
-            <br>
-            <br>
-         
-                <br>
-                <br>
-    
-                <input v-model="$store.state.title"
-                       @keyup.enter="edit"
-                       required
-                       class="full-width" placeholder="Edit Todo">
-            
-                <input v-model="$store.state.date"
-                       @keyup.enter="edit"
-                       required
-                       class="full-width" placeholder="Edit Todo">
-                <br>
-                <br>
-                <br>
-                <br>
-                <center>
-                    <button class="primary3"
-                            @click="edit">
-                        Update
-                    </button>
-                    <button class="danger3"
-                            @click="clear">
-                        Cancel
-                    </button>
-                </center>
-            </div>
-        </div>
-    
-    </q-layout>
+  </q-layout>
 </template>
 
 <script>
-import _ from 'lodash'
-import Quasar, { Utils, LocalStorage, Toast } from 'quasar'
-
 export default {
-    data() {
-        return {
-            title: this.$store.state.title,
-            date: this.$store.state.date
-        }
-    },
-
-    methods: {
-        edit(id) {
-
-            
-            this.$router.push({ path: '/' })
-            this.$store.dispatch('edit',id)
-        },
-
-        clear() {
-
-            this.$store.state.title = ""
-        }
-    },
-mounted() {
-
-    // create task store if not exist
-    if (LocalStorage.has('tasks') === false) {
-      LocalStorage.set('tasks', [])
-    }
+  data () {
+    return {}
   }
 }
-
 </script>
 
 <style>
-.floating-label input, .floating-label textarea {
-    margin-top: 1.45rem;
-    background-color: white;
-    
-    
-}
-span.q-tab-label{
-    color: white;
-}
-button.primary3 {
-    background: #2196f3;
-    color: white;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    font-weight: 700;
-    margin-right: 132px !important;
-}
-button.danger3 {
-    background: #b91515;
-    color: white;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    font-weight: 700;
-    margin-left: 0 !important;
-}
-button.primary {
-    background: #131717;
-    color: #f5fbff;
-}
-button.danger {
-    background: #b91515;
-    color: #f5fbff;
-}
-input, textarea, select, button {
-    text-rendering: auto;
-    color: initial;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    margin: 0em 0em 0em 0em;
-    font: 13.3333px Arial;
-    background-color: white;
+#LeftBack {
+  font-size: 50px;
+  width: 50px;
+  color: #d4ebfd;
+  position: relative;
+  right: 0.9em;
+  margin: 0px;
 }
 
-#tagline{ 
+#Back {
+
+  font-size: 18px;
+  color: #d4ebfd;
+  position: relative;
+
+  left: 0.1em;
+  margin: 0px;
+}
+#tag {
+  width: 1px;
+  font-size: 60px;
+  position: relative;
+
+  right: 0.6em;
+  margin: 0px;
+}
+.q-toolbar-title {
+  color: #d4ebfd;
+
+}
+.q-search {
+  background-color: #EBEBEB;
+  position: absolute;
+  left: 15em;
+  margin: 0px;
+}
+button.q-search-icon span {
+  display: none;
+  
+}
+.toolbar {
+  background: #2196f3;
+  color: white;
+}
+.q-search-input {
+  font-weight: 400;
+  padding: 31px;
+  width: 100%;
+}
+.q-search-input-container {
+  width: 190px;
+}
+
+.q-search-icon {
+  color: white;
+  background: #2196f3;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    font-weight: 700;
-    line-height: 1.5;
-    color: #566b78;
-  }
-
-.full-width {
-    width: 80% !important;
-    height: 50px;
-    padding: 1px;
-    margin-left: 26px !important;
-    margin-right: 0 !important;
+  font-weight: 500px;
 }
+
 
 
 </style>
