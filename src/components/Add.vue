@@ -12,6 +12,7 @@
                 </q-tab>
     
             </q-tabs>
+            
         </div>
         <div class="layout-view">
             <br>

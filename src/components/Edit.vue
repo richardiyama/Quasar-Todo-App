@@ -2,29 +2,26 @@
   <q-layout>
     <div slot="header"
          class="toolbar">
-      <button class="default"
-              @click="clickMethod()">
-        <i id="tag">keyboard_arrow_left</i>
-      </button>
+      
+            
+        <i style="padding-left: 10px; font-size: 30px">keyboard_arrow_left</i>
+      
   
-      <label id="Back">Home</label>
-      <q-toolbar-title :padding="1"
-                       id="LeftBack">
-        Edit Task
-      </q-toolbar-title>
-  
-      <q-search class="default"
-                v-model="$store.state.search"></q-search>
+      <div class="auto"
+                 style="padding-left: 1px; line-height: 3;font-size: 20px;height: 60px">Home</div>
+     <div class="auto"
+                 style="padding-left: 10px; line-height: 3;font-size: 18px;height: 60px">Edit Tasks</div>
+     <i style="padding-left: 35px; font-size: 30px">search</i>
   
     </div>
   
     <div class="layout-view">
   
-      <div class="list">
+      <div class="list-first">
         <div class="item">
           <div class="item-content row">
   
-            <i style="width: 100px;font-size: 30px; color: #2095f4">radio_button_unchecked</i>
+            <i style="font-size: 30px; color: #2095f4">radio_button_unchecked</i>
             <div class="auto"
                  style="padding-left: 10px;font-size: 18px">Refinish basement</div>
             <i style="font-size: 40px; color: darkgray;">star_border</i>
@@ -32,7 +29,7 @@
         </div>
       </div>
   
-      <div class="list">
+      <div class="list-second">
         <div class="item">
           <div class="item-content row">
   
@@ -44,7 +41,7 @@
         </div>
       </div>
   
-      <div class="list">
+      <div class="list-third">
         <div class="item">
           <div class="item-content row">
   
@@ -63,7 +60,7 @@
         </div>
       </div>
   
-      <div class="list">
+      <div class="list-fouth">
         <div class="item">
           <div class="item-content row">
             <i style="font-size: 20px; color: #2095f4">account_circle</i>
@@ -74,7 +71,7 @@
         </div>
       </div>
   
-      <div class="list">
+      <div class="list-fifth">
         <div class="item">
           <div class="item-content row">
             <i class="ico fa fa-comments" style="font-size: 20px; color: darkgray"></i>
@@ -87,7 +84,7 @@
       <br>
       <br>
   
-      <div class="list">
+      <div class="list-sixth">
         <div class="item">
           <div class="item-content row">
             <i style="font-size: 25px; color: #2095f4">event_available</i>
@@ -100,7 +97,7 @@
         </div>
       </div>
   
-      <div class="list">
+      <div class="list-seventh">
         <div class="item">
           <div class="item-content row">
             <i style="font-size: 25px; color: darkgreen">slideshow</i>
@@ -113,7 +110,7 @@
         </div>
       </div>
   
-      <div class="list">
+      <div class="list-eight">
         <div class="item">
           <div class="item-content row">
             <i style="font-size: 25px; color: darkgray">notifications</i>
@@ -123,7 +120,7 @@
         </div>
       </div>
   
-      <div class="list">
+      <div class="list-nineth">
         <div class="item">
           <div class="item-content row">
             <i style="font-size: 25px; color: darkgray">near_me</i>
@@ -134,7 +131,7 @@
         </div>
       </div>
   
-      <div class="list">
+      <div class="list-tenth">
         <div class="item">
           <div class="item-content row">
             <i class="fa fa-repeat" style="font-size: 25px; color: darkgray"></i>
@@ -144,7 +141,7 @@
         </div>
       </div>
   
-      <div class="list">
+      <div class="list-eleventh">
         <div class="item">
           <div class="item-content row">
             <i style="font-size: 25px; color: darkgray">warning</i>
@@ -177,68 +174,15 @@ export default {
   margin-right: 15px;
 }
 
-#LeftBack {
-  font-size: 50px;
-  width: 50px;
-  color: #d4ebfd;
-  position: relative;
-  right: 0.9em;
-  margin: 0px;
-}
 
-#Back {
-
-  font-size: 18px;
-  color: #d4ebfd;
-  position: relative;
-
-  left: 0.1em;
-  margin: 0px;
-}
-
-#tag {
-  width: 1px;
-  font-size: 60px;
-  position: relative;
-
-  right: 0.6em;
-  margin: 0px;
-}
-
-.q-toolbar-title {
-  color: #d4ebfd;
-}
-
-.q-search {
-  background-color: #EBEBEB;
-  position: absolute;
-  left: 15em;
-  margin: 0px;
-}
-
-button.q-search-icon span {
-  display: none;
-}
 
 .toolbar {
   background: #2196f3;
   color: white;
 }
 
-.q-search-input {
-  font-weight: 400;
-  padding: 31px;
-  width: 100%;
-}
 
-.q-search-input-container {
-  width: 190px;
-}
 
-.q-search-icon {
-  color: white;
-  background: #2196f3;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  font-weight: 500px;
-}
+
+
 </style>

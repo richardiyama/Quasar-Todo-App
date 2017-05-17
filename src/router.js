@@ -21,8 +21,9 @@ export default new VueRouter({
    */
 
   routes: [
-   // { path: '/', component: load('Index') }, // Default
+    { path: '/', component: load('Index') }, // Default
     { path: '/Add', component: load('Add') },
+    { path: '/SmartList', component: load('SmartList') },
     { path: '/Edit', component: load('Edit') } // Not found
   ]
 })
