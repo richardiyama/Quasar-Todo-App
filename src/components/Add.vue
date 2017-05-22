@@ -1,55 +1,71 @@
 <template>
     <q-layout>
     
-        <div slot="header"
-             class="toolbar">
+        <div slot="header" class="toolbar">
     
-            <q-tabs>
-                <q-tab id="tagline"icon="undo"
-                       route="/"
-                       exact>
-                   Go Back
-                </q-tab>
+            <i style="padding-left: 10px; font-size: 30px">arrow_back</i>
     
-            </q-tabs>
-            
+            <div class="auto" style="padding-left: 5px; line-height: 3;font-size: 20px;height: 60px">New Task</div>
+            <i style="padding-left: 35px; font-size: 30px">done</i>
+    
         </div>
         <div class="layout-view">
-            <br>
+            <label class="caption" style="padding-left: 20px;color: #5188ae; height: 22px;position: relative;margin: 2px;font-size: 18px;font-weight: bold;width: 150px; padding: 10px; width:200px;text-align: left; line-height: 3;font-family: sans-serif">What is to be done?</label>
+            <div class="item multiple-lines">
+                <div class="item-content">
+                    <div class="stacked-label">
+                        <input class="auto" style="padding-left: 30px;  width: 290px">
+                        <i style="font-size: 40px; color: darkgray;">mic</i>
+                        <label>Stacked Label</label>
     
-            <br>
-            <br>
-            <br>
-         
-                <br>
-                <br>
+                    </div>
+                </div>
+            </div>
     
-                <input v-model="$store.state.title"
-                       @keyup.enter="add"
-                       required
-                       class="full-width" placeholder="New Todo">
-                       <label>
-             <input type="date" v-model="$store.state.date"
-                       @keyup.enter="add"
-                       required
-                       class="full-width">
-                
-                <br>
-                <br>
-                <br>
-                <br>
-                <center>
-                    <button class="primary2"
-                            @click="add">
-                        Add
-                    </button>
+            <div class="item multiple-lines">
+                <label class="caption" style="padding-left: 20px;color: #5188ae; height: 22px;position: relative;margin: 2px;font-size: 18px;font-weight: bold;width: 150px; padding: 10px; width:200px;text-align: left; line-height: 3;font-family: sans-serif">Due date</label>
+                <div class="item-content">
+                    <div class="stacked-label">
+                        <input class="auto" style="padding-left: 30px;  width: 290px">
+                        <i style="font-size: 40px; color: darkgray;">event</i>
+                        <label>Stacked Label</label>
+                    </div>
+                </div>
+            </div>
     
-                    <button class="danger2"
-                            @click="clear">
-                        Cancel
-                    </button>
-                </center>
-            
+            <div class="item multiple-lines">
+    
+                <div class="item-content">
+                    <div class="stacked-label">
+                        <input class="auto" style="padding-left: 30px;  width: 290px">
+                        <i style="font-size: 40px; color: darkgray;">access_time</i>
+                        <label>Stacked Label</label>
+                    </div>
+                </div>
+            </div>
+            <div class="item multiple-lines">
+                <label class="caption" style="padding-left: 20px;color: #5188ae; height: 22px;position: relative;margin: 1px;font-size: 18px;font-weight: bold;width: 150px; padding: 10px; width:200px;text-align: left; line-height: 4;font-family: sans-serif">Repeat</label>
+                <div class="item-content">
+                    <select v-model="selected">
+                        <option disabled value="">Please select one</option>
+                        <option>A</option>
+                        <option>B</option>
+                        <option>C</option>
+                    </select>
+                </div>
+            </div>
+
+             <div class="item multiple-lines">
+                <label class="caption" style="padding-left: 20px;color: #5188ae; height: 22px;position: relative;margin: 1px;font-size: 18px;font-weight: bold;width: 150px; padding: 10px; width:200px;text-align: left; line-height: 4;font-family: sans-serif">Add to a list</label>
+                <div class="item-content">
+                    <select v-model="selected">
+                        <option disabled value="">Please select one</option>
+                        <option>A</option>
+                        <option>B</option>
+                        <option>C</option>
+                    </select>
+                </div>
+            </div>
         </div>
     
     </q-layout>
@@ -61,6 +77,7 @@ import Quasar, { Utils, Dialog, LocalStorage, Toast } from 'quasar'
 
 
 export default {
+
     methods: {
 
         add() {
@@ -81,78 +98,28 @@ export default {
     },
     mounted() {
 
-    // create task store if not exist
-    if (LocalStorage.has('tasks') === false) {
-      LocalStorage.set('tasks', [])
+        // create task store if not exist
+        if (LocalStorage.has('tasks') === false) {
+            LocalStorage.set('tasks', [])
+        }
     }
-  }
 }
 
 </script>
 
 <style>
-.floating-label input, .floating-label textarea {
-    margin-top: 1.45rem;
-    background-color: white;
-    
-
-}
-span.q-tab-label{
-    color: white;
-}
-
 button.primary {
-    background: #131717;
-    color: #f5fbff;
+    background: #027be3;
+    text-shadow: 0 0 2px #000;
+    color: #fff;
+    margin: 1px;
 }
+
+
+
 button.danger {
-    background: #b91515;
-    color: #f5fbff;
+    background: darkred;
+    text-shadow: 0 0 2px #000;
+    color: #fff;
 }
-button.primary2 {
-    background: #2196f3;
-    color: white;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    font-weight: 700;
-    margin-right: 132px !important;
-}
-button.danger2 {
-    background: #b91515;
-    color: white;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    font-weight: 700;
-    margin-left: 0 !important;
-}
-input, textarea, select, button {
-    text-rendering: auto;
-    color: initial;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    margin: 0em 0em 0em 0em;
-    font: 13.3333px Arial;
-    background-color: white;
-}
-
-#tagline{ 
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    font-weight: 700;
-    line-height: 1.5;
-    color: #566b78;
-  }
-
-.full-width {
-    width: 80% !important;
-    height: 50px;
-    padding: 1px;
-    margin-left: 26px !important;
-    margin-right: 0 !important;
-}
-
-
-
 </style>
