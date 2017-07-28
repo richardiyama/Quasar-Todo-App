@@ -7,6 +7,7 @@ function load (component) {
   return () => System.import(`components/${component}.vue`)
 }
 
+
 export default new VueRouter({
   /*
    * NOTE! VueRouter "history" mode DOESN'T works for Cordova builds,
