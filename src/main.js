@@ -9,6 +9,7 @@ import store from './store/store'
 
 Vue.use(Quasar)
 
+
 Quasar.start(() => {
   new Vue({
     el: '#q-app',
