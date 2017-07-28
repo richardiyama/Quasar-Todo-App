@@ -1,5 +1,6 @@
 <template>
-    <q-layout>
+   
+   <q-layout>
     
         <div slot="header" class="toolbar">
     
