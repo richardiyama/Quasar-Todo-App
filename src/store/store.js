@@ -4,6 +4,7 @@ import { LocalStorage, Toast } from 'quasar'
 import _ from 'lodash'
 import moment from 'moment'
 
+
 Vue.use(Vuex)
 
 var lastCount = 0
