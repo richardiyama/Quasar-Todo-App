@@ -10,7 +10,8 @@
             <i style="padding-left: 35px; font-size: 30px">done</i>
     
         </div>
-        <div class="layout-view">
+       
+       <div class="layout-view">
             <label class="caption" style="padding-left: 20px;color: #5188ae; height: 22px;position: relative;margin: 2px;font-size: 18px;font-weight: bold;width: 150px; padding: 10px; width:200px;text-align: left; line-height: 3;font-family: sans-serif">What is to be done?</label>
             <div class="item multiple-lines">
                 <div class="item-content">
