@@ -21,6 +21,7 @@ export default new VueRouter({
    * build publicPath back to '' so Cordova builds work again.
    */
 
+  
   routes: [
     { path: '/', component: load('Index') }, // Default
     { path: '/Add', component: load('Add') },
