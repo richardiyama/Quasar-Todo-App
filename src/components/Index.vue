@@ -15,6 +15,7 @@
                  style="padding-left: 10px; line-height: 3;font-size: 18px;height: 60px">Edit</div>
         </div>
     
+        
         <div class="layout-view">
             <p class="caption"
                style="padding-left: 10px;color: #5188ae; height: 22px;position: relative;margin: 2px;font-size: 18px;font-weight: bold;width: 150px; padding: 10px;text-align: left; line-height: 0;font-family: sans-serif">Today</p>
