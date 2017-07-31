@@ -5,6 +5,7 @@
       404
     </div>
     <div>
+      
       <div class="error-card card bg-white column items-center justify-center">
         <i class="text-grey-5">error_outline</i>
         <p class="caption text-center">There is noting here!!! ...</p>
