@@ -8,6 +8,7 @@
     
             <div class="auto"
                  style="padding-left: 5px; line-height: 3;font-size: 20px;height: 60px">Ben Smith</div>
+    
     <i style="padding-left: 35px; font-size: 30px">search</i>
         </div>
     
