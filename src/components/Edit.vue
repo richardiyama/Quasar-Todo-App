@@ -22,7 +22,8 @@
         <div class="item">
           <div class="item-content row">
   
-            <i style="font-size: 30px; color: #2095f4">radio_button_unchecked</i>
+           
+           <i style="font-size: 30px; color: #2095f4">radio_button_unchecked</i>
             <div class="auto"
                  style="padding-left: 10px;font-size: 18px">Refinish basement</div>
             <i style="font-size: 40px; color: darkgray;">star_border</i>
