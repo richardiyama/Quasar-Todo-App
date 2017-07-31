@@ -22,6 +22,7 @@ function NextDay (date) {
   return (a - b)
 }
 
+
 const state = {
   id: 0,
   title: '',
