@@ -36,6 +36,7 @@ const state = {
   date: ''
 }
 
+
 const actions = {
 
   add: ({ commit }) => commit('add'),
