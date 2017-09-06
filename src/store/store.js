@@ -15,6 +15,7 @@ function counter () {
 }
 
 function NextDay (date) {
+  
   var a = moment(date).format('D')
   var b = moment().format('D')
   console.log(a)
